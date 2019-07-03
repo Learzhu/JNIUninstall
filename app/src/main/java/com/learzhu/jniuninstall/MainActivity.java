@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new JNITest().uninstall("com.learzhu.jniuninstall", 1);
+//        new JNITest().uninstall("com.learzhu.jniuninstall", 1);
         final TextView textView = findViewById(R.id.tv);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,5 +24,11 @@ public class MainActivity extends AppCompatActivity {
                         new JNITest().testHello());
             }
         });
+        //监听卸载事件
+        listening();
+    }
+
+    private void listening() {
+        UninstallObserver.startWork("/data/data/" + getPackageName(), "https://www.baidu.com", android.os.Build.VERSION.SDK_INT);
     }
 }
